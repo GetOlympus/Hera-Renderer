@@ -107,7 +107,7 @@
         _this.media.open();
     };
 
-    Upload.prototype.opened_medialib = function ($items) {
+    Upload.prototype.opened_medialib = function () {
         var _this = this;
 
         // bind event when medialib popin is opened
