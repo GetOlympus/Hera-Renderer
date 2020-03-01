@@ -21,7 +21,7 @@ use Twig_SimpleFunction;
  *
  */
 
-class Application extends ApplicationInterface
+class Application implements ApplicationInterface
 {
     /**
      * @var string
@@ -80,7 +80,7 @@ class Application extends ApplicationInterface
     public function __construct($context, $template, $vars, $assets = [], $usecache = false)
     {
         // Build all views folders to add
-        $paths = [];
+        $paths = $this->paths;
 
         // Iterate on fields to render html
         if (isset($vars['fields'])) {
