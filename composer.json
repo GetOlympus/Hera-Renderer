@@ -1,0 +1,31 @@
+{
+  "name": "getolympus/olympus-hera-renderer",
+  "type": "library",
+  "description": "Olympus Hera is a bundle used to render all components views through the TWIG template engine.",
+  "keywords": ["olympus-hera", "olympus", "hera", "renderer", "render", "twig", "template", "engine", "library", "php", "wordpress"],
+  "homepage": "https://github.com/GetOlympus/Hera-Renderer",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Achraf Chouk",
+      "homepage": "https://github.com/crewstyle"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "GetOlympus\\Hera\\": "src/Hera/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.x-dev"
+    }
+  },
+  "minimum-stability": "stable",
+  "require-dev": {
+    "phpunit/phpunit": "~5.3"
+  },
+  "require": {
+    "getolympus/olympus-hermes-translator": "^0.0.2"
+  }
+}
