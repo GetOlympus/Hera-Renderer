@@ -235,7 +235,10 @@ class Application implements ApplicationInterface
      */
     public function enqueue($assets = []) : void
     {
+        // Works on assets
         $assets = array_merge(['scripts' => [], 'styles' => []], $assets);
+        $assets['scripts'] = array_merge($assets['scripts'], $this->scripts);
+        $assets['styles']  = array_merge($assets['styles'], $this->styles);
 
         // Check lists
         if (empty($assets['scripts']) && empty($assets['styles'])) {

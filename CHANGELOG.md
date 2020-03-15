@@ -1,3 +1,6 @@
+## 0.0.4 (March 15th, 2020)
+Use default Zeus-Core bundle scripts and styles
+
 ## 0.0.3 (March 10th, 2020)
 Fix copy php call with source file real path
 
