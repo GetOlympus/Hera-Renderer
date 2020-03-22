@@ -1,3 +1,6 @@
+## 0.0.5 (March 22th, 2020)
+Fix TWIG custom WordPress functions
+
 ## 0.0.4 (March 15th, 2020)
 Use default Zeus-Core bundle scripts and styles
 

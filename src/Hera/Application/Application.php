@@ -155,29 +155,34 @@ class Application implements ApplicationInterface
 
         // Author
         $this->twig->addFunction(new Twig_SimpleFunction('get_the_author_meta', function ($display, $id) {
-            get_the_author_meta($display, $id);
+            return get_the_author_meta($display, $id);
         }));
         $this->twig->addFunction(new Twig_SimpleFunction('get_author_posts_url', function ($id) {
-            get_author_posts_url($id);
+            return get_author_posts_url($id);
         }));
 
         // Image
-        $this->twig->addFunction(new Twig_SimpleFunction('has_post_thumbnail', function ($id) {
-            has_post_thumbnail($id);
+        $this->twig->addFunction(new Twig_SimpleFunction('has_post_thumbnail', function ($id = null) {
+            return has_post_thumbnail($id);
         }));
         $this->twig->addFunction(new Twig_SimpleFunction('get_post_thumbnail_id', function ($id) {
-            get_post_thumbnail_id($id);
+            return get_post_thumbnail_id($id);
         }));
         $this->twig->addFunction(new Twig_SimpleFunction('wp_get_attachment_image_src', function ($id, $format) {
-            wp_get_attachment_image_src($id, $format);
+            return wp_get_attachment_image_src($id, $format);
         }));
 
         // Permalink
         $this->twig->addFunction(new Twig_SimpleFunction('get_permalink', function ($id) {
-            get_permalink($id);
+            return get_permalink($id);
         }));
         $this->twig->addFunction(new Twig_SimpleFunction('get_term_link', function ($id, $type) {
-            get_term_link($id, $type);
+            return get_term_link($id, $type);
+        }));
+
+        // Post
+        $this->twig->addFunction(new Twig_SimpleFunction('get_the_title', function ($id = 0) {
+            return get_the_title($id);
         }));
 
         // Template
@@ -190,12 +195,12 @@ class Application implements ApplicationInterface
 
         // Terms
         $this->twig->addFunction(new Twig_SimpleFunction('get_the_term_list', function ($id, $type, $before, $inside, $after) {
-            get_the_term_list($id, $type, $before, $inside, $after);
+            return get_the_term_list($id, $type, $before, $inside, $after);
         }));
 
         // wpEditor
         $this->twig->addFunction(new Twig_SimpleFunction('wp_editor', function ($content, $editor_id, $settings = []) {
-            wp_editor($content, $editor_id, $settings);
+            return wp_editor($content, $editor_id, $settings);
         }));
 
 
@@ -259,7 +264,7 @@ class Application implements ApplicationInterface
                 $details[$key] = [];
 
                 // Media upload case
-                if ('media' === $key) {
+                if ('enqueue_media' === $key) {
                     wp_enqueue_media();
                     continue;
                 }
