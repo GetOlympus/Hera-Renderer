@@ -6,10 +6,10 @@ use GetOlympus\Hera\Application\ApplicationInterface;
 use GetOlympus\Hera\Exception\Exception;
 use GetOlympus\Hera\Utils\Helpers;
 use GetOlympus\Hermes\Hermes;
-use Twig_Environment;
-use Twig_Filter;
-use Twig_Loader_Filesystem;
-use Twig_SimpleFunction;
+use Twig\Environment;
+use Twig\Filter;
+use Twig\Loader\FilesystemLoader;
+use Twig\TwigFunction;
 
 /**
  * Olympus Hera Renderer.
@@ -101,7 +101,7 @@ class Application implements ApplicationInterface
          *
          * @return array
          */
-        $paths = apply_filters('ol_hera_render_views', $paths);
+        $paths = apply_filters('ol.hera.render_views', $paths);
 
         // Check paths
         if (empty($paths)) {
@@ -124,7 +124,7 @@ class Application implements ApplicationInterface
         $this->usecache = $usecache;
 
         // Define Twig loaders
-        $loader = new Twig_Loader_Filesystem();
+        $loader = new \Twig\Loader\FilesystemLoader();
 
         // Add core paths with alias
         foreach ($paths as $alias => $path) {
@@ -135,7 +135,7 @@ class Application implements ApplicationInterface
         $args = $this->usecache ? ['cache' => false, 'debug' => true] : [];
 
         // Build Twig renderer - no cache needed for twig rendering
-        $this->twig = new Twig_Environment($loader, $args);
+        $this->twig = new \Twig\Environment($loader, $args);
 
         // Add WordPress and Custom functions
         $this->addFunctions();
@@ -154,52 +154,52 @@ class Application implements ApplicationInterface
          */
 
         // Author
-        $this->twig->addFunction(new Twig_SimpleFunction('get_the_author_meta', function ($display, $id) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_the_author_meta', function ($display, $id) {
             return get_the_author_meta($display, $id);
         }));
-        $this->twig->addFunction(new Twig_SimpleFunction('get_author_posts_url', function ($id) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_author_posts_url', function ($id) {
             return get_author_posts_url($id);
         }));
 
         // Image
-        $this->twig->addFunction(new Twig_SimpleFunction('has_post_thumbnail', function ($id = null) {
+        $this->twig->addFunction(new \Twig\TwigFunction('has_post_thumbnail', function ($id = null) {
             return has_post_thumbnail($id);
         }));
-        $this->twig->addFunction(new Twig_SimpleFunction('get_post_thumbnail_id', function ($id) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_post_thumbnail_id', function ($id) {
             return get_post_thumbnail_id($id);
         }));
-        $this->twig->addFunction(new Twig_SimpleFunction('wp_get_attachment_image_src', function ($id, $format) {
+        $this->twig->addFunction(new \Twig\TwigFunction('wp_get_attachment_image_src', function ($id, $format) {
             return wp_get_attachment_image_src($id, $format);
         }));
 
         // Permalink
-        $this->twig->addFunction(new Twig_SimpleFunction('get_permalink', function ($id) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_permalink', function ($id) {
             return get_permalink($id);
         }));
-        $this->twig->addFunction(new Twig_SimpleFunction('get_term_link', function ($id, $type) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_term_link', function ($id, $type) {
             return get_term_link($id, $type);
         }));
 
         // Post
-        $this->twig->addFunction(new Twig_SimpleFunction('get_the_title', function ($id = 0) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_the_title', function ($id = 0) {
             return get_the_title($id);
         }));
 
         // Template
-        $this->twig->addFunction(new Twig_SimpleFunction('get_footer', function ($file = '') {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_footer', function ($file = '') {
             get_footer($file);
         }));
-        $this->twig->addFunction(new Twig_SimpleFunction('get_header', function ($file = '') {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_header', function ($file = '') {
             get_header($file);
         }));
 
         // Terms
-        $this->twig->addFunction(new Twig_SimpleFunction('get_the_term_list', function ($id, $type, $before, $inside, $after) {
+        $this->twig->addFunction(new \Twig\TwigFunction('get_the_term_list', function ($id, $type, $before, $inside, $after) {
             return get_the_term_list($id, $type, $before, $inside, $after);
         }));
 
         // wpEditor
-        $this->twig->addFunction(new Twig_SimpleFunction('wp_editor', function ($content, $editor_id, $settings = []) {
+        $this->twig->addFunction(new \Twig\TwigFunction('wp_editor', function ($content, $editor_id, $settings = []) {
             return wp_editor($content, $editor_id, $settings);
         }));
 
@@ -209,14 +209,14 @@ class Application implements ApplicationInterface
          */
 
         // Dump array
-        $this->twig->addFunction(new Twig_SimpleFunction('dump', function ($array) {
+        $this->twig->addFunction(new \Twig\TwigFunction('dump', function ($array) {
             echo '<pre>';
             var_dump($array);
             echo '</pre>';
         }));
 
         // File inclusion
-        $this->twig->addFunction(new Twig_SimpleFunction('include_file', function ($file) {
+        $this->twig->addFunction(new \Twig\TwigFunction('include_file', function ($file) {
             include($file);
         }));
 
@@ -228,9 +228,9 @@ class Application implements ApplicationInterface
         /**
          * Add your custom Twig functions.
          *
-         * @param Twig_Environment $twig
+         * @param \Twig\Environment $twig
          */
-        do_action('ol_hera_render_functions', $this->twig);
+        do_action('ol.hera.render_functions', $this->twig);
     }
 
     /**

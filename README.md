@@ -110,9 +110,9 @@ new Hera($context, $template, $vars, $assets, $usecache);
 If you need to add your custom TWIG functions, you can use the `ol_hera_render_functions` action hook:
 
 ```php
-add_action('ol_hera_render_functions', function ($twig) {
+add_action('ol.hera.render_functions', function ($twig) {
     // Example to use the WordPress `get_header()` function through TWIG: {{ get_header(file) }}
-    $twig->addFunction(new Twig_SimpleFunction('get_header', function ($file = '') {
+    $twig->addFunction(new \Twig\TwigFunction('get_header', function ($file = '') {
         get_header($file);
     }));
 });

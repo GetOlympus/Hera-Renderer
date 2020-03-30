@@ -26,6 +26,7 @@
     "phpunit/phpunit": "~5.3"
   },
   "require": {
-    "getolympus/olympus-hermes-translator": "^0.0.2"
+    "getolympus/olympus-hermes-translator": "^0.0.2",
+    "twig/twig": "^2.0"
   }
 }

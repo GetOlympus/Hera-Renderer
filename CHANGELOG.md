@@ -1,5 +1,8 @@
+## 0.0.6 (March 30th, 2020)
+Add Twig bundle from composer, fix Twig calls
+
 ## 0.0.5 (March 22th, 2020)
-Fix TWIG custom WordPress functions
+Fix Twig custom WordPress functions
 
 ## 0.0.4 (March 15th, 2020)
 Use default Zeus-Core bundle scripts and styles
